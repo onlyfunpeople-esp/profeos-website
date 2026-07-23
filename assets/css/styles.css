@@ -91,6 +91,8 @@ button:focus:not(:focus-visible), a:focus:not(:focus-visible), input:focus:not(:
 
 /* CTA */
 .nav-cta { font-size: 14px; font-weight: 600; }
+.nav-cta-app { color: var(--mint-dark); border: 1.5px solid var(--mint); border-radius: 5px; padding: 6px 14px; margin-left: 12px; }
+.nav-cta-app:hover { background: rgba(45,191,158,.1); }
 .nav-cta span, .button span, .text-link span { margin-left: 5px; }
 
 /* ---------- Dark-mode toggle ---------- */
@@ -170,6 +172,11 @@ h1 em, h2 em { font-style: normal; color: var(--mint); }
   box-shadow: 0 7px 16px rgba(45,191,158,.2);
 }
 .button-primary:hover { background: #43caaa; box-shadow: 0 10px 22px rgba(45,191,158,.28); }
+.button-secondary {
+  background: transparent; color: var(--mint-dark);
+  border: 2px solid var(--mint);
+}
+.button-secondary:hover { background: rgba(45,191,158,.08); box-shadow: 0 4px 12px rgba(45,191,158,.15); }
 .button-quiet { color: #53606b; }
 .button-quiet:hover { background: rgba(31,41,51,.05); }
 
