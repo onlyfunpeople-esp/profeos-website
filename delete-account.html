@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="description" content="Solicitá la eliminación de tu cuenta y datos de ProfeOS." />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <title>Eliminar cuenta | ProfeOS</title>
+    <style>
+      .delete-hero {
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 150px 0 80px;
+        background: linear-gradient(160deg, #fff 0%, #fef2f2 100%);
+      }
+      .dark .delete-hero { background: linear-gradient(160deg, var(--dm-bg) 0%, var(--dm-surface) 100%); }
+      .delete-card {
+        max-width: 560px;
+        width: 100%;
+        padding: 48px 40px;
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        box-shadow: 0 20px 50px rgba(0,0,0,.06);
+        text-align: left;
+      }
+      .dark .delete-card { background: var(--dm-surface); box-shadow: 0 20px 50px rgba(0,0,0,.3); }
+      .delete-card h1 { font-size: 28px; font-weight: 700; margin: 0 0 12px; text-align: center; }
+      .delete-card .subtitle { font-size: 15px; color: var(--muted); margin: 0 0 28px; text-align: center; }
+      .delete-card label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--ink); }
+      .dark .delete-card label { color: var(--dm-text); }
+      .delete-card input, .delete-card textarea {
+        width: 100%; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 8px;
+        font-size: 14px; font-family: var(--sans); background: var(--paper); color: var(--ink);
+        transition: border-color .2s;
+      }
+      .dark .delete-card input, .dark .delete-card textarea { background: var(--dm-surface-alt); border-color: var(--dm-border); color: var(--dm-text); }
+      .delete-card input:focus, .delete-card textarea:focus { outline: none; border-color: var(--mint); }
+      .delete-card textarea { min-height: 80px; resize: vertical; }
+      .delete-card .field { margin-bottom: 18px; }
+      .delete-btn {
+        display: block; width: 100%; padding: 14px; margin-top: 8px;
+        background: #dc2626; color: #fff; border: none; border-radius: 8px;
+        font-size: 15px; font-weight: 700; cursor: pointer;
+        transition: background .2s;
+      }
+      .delete-btn:hover { background: #b91c1c; }
+      .delete-btn:disabled { opacity: .5; cursor: not-allowed; }
+      .delete-warning {
+        margin-top: 24px; padding: 16px; background: #fef2f2; border: 1px solid #fecaca;
+        border-radius: 8px; font-size: 13px; color: #991b1b; line-height: 1.6;
+      }
+      .dark .delete-warning { background: rgba(220,38,38,.1); border-color: rgba(220,38,38,.3); color: #fca5a5; }
+      .delete-warning strong { display: block; margin-bottom: 4px; }
+      .form-success {
+        display: none; text-align: center; padding: 40px 20px;
+      }
+      .form-success .check { font-size: 48px; margin-bottom: 16px; }
+      .form-success h2 { font-size: 22px; margin: 0 0 8px; }
+      .form-success p { color: var(--muted); font-size: 14px; }
+    </style>
+  </head>
+  <body>
+    <header class="site-header is-scrolled">
+      <nav class="nav container">
+        <a class="brand" href="index.html" aria-label="ProfeOS, inicio">
+          <svg class="brand-mark" viewBox="0 0 40 48" aria-hidden="true"><path d="M8 42V14a12 12 0 0 1 24 0c0 6-4 11-10 12L8 42Z"/><path d="M14 39V15a6 6 0 0 1 12 0c0 3.3-2.7 6-6 6h-6"/></svg>
+          <span>Profe<span>OS</span></span>
+        </a>
+        <div class="nav-links">
+          <a href="index.html">Inicio</a>
+          <a href="privacy.html">Privacidad</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="delete-hero">
+        <div class="delete-card">
+          <h1>Eliminar mi cuenta</h1>
+          <p class="subtitle">Completá el formulario y procesaremos tu solicitud.</p>
+
+          <div id="deleteForm">
+            <div class="field">
+              <label for="name">Nombre completo</label>
+              <input id="name" name="name" type="text" autocomplete="name" required placeholder="Tu nombre" />
+            </div>
+            <div class="field">
+              <label for="email">Correo electrónico de la cuenta</label>
+              <input id="email" name="email" type="email" autocomplete="email" required placeholder="nombre@escuela.edu.ar" />
+            </div>
+            <div class="field">
+              <label for="reason">Motivo (opcional)</label>
+              <textarea id="reason" name="reason" placeholder="Contanos por qué querés eliminar tu cuenta..."></textarea>
+            </div>
+            <button class="delete-btn" type="button" id="submitBtn" onclick="submitRequest()">
+              Solicitar eliminación de cuenta
+            </button>
+          </div>
+
+          <div class="form-success" id="successMsg">
+            <div class="check">&#10003;</div>
+            <h2>Solicitud enviada</h2>
+            <p>Recibimos tu pedido. Procesaremos la eliminación de tu cuenta y datos en un plazo de <strong>30 días hábiles</strong>. Te enviaremos una confirmación por correo electrónico.</p>
+          </div>
+
+          <div class="delete-warning">
+            <strong>&#9888; ¿Qué se eliminará?</strong>
+            Tu cuenta, perfil, y todos tus datos: instituciones, cursos, estudiantes, asistencias, calificaciones, eventos de calendario y copias de seguridad. Esta acción es <strong>permanente e irreversible</strong>.
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div>
+          <a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 40 48" aria-hidden="true"><path d="M8 42V14a12 12 0 0 1 24 0c0 6-4 11-10 12L8 42Z"/><path d="M14 39V15a6 6 0 0 1 12 0c0 3.3-2.7 6-6 6h-6"/></svg><span>Profe<span>OS</span></span></a>
+          <p>Menos administración. Más enseñanza.</p>
+        </div>
+        <div class="footer-links">
+          <a href="privacy.html">Política de privacidad</a>
+          <a href="terms.html">Términos</a>
+          <a href="mailto:hola@profeos.com.ar">Contacto</a>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>&copy; <span data-year></span> ProfeOS</span>
+        <span>Hecho en Argentina</span>
+      </div>
+    </footer>
+    <script src="assets/js/main.js"></script>
+    <script>
+      function submitRequest() {
+        var name = document.getElementById('name').value.trim();
+        var email = document.getElementById('email').value.trim();
+        if (!name || !email) { alert('Completá nombre y correo electrónico.'); return; }
+
+        var btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.textContent = 'Enviando...';
+
+        var reason = document.getElementById('reason').value.trim();
+        var subject = encodeURIComponent('Solicitud de eliminación de cuenta - ' + email);
+        var body = encodeURIComponent(
+          'Nombre: ' + name + '\n' +
+          'Correo: ' + email + '\n' +
+          (reason ? 'Motivo: ' + reason + '\n' : '') +
+          '\n---\nSolicitud de eliminación de cuenta según Política de Privacidad de ProfeOS.'
+        );
+
+        window.location.href = 'mailto:hola@profeos.com.ar?subject=' + subject + '&body=' + body;
+
+        document.getElementById('deleteForm').style.display = 'none';
+        document.getElementById('successMsg').style.display = 'block';
+      }
+    </script>
+  </body>
+</html>
