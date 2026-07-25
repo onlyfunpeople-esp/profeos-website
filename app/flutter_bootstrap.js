@@ -7,8 +7,8 @@ eventListener = (message) => {
     const pendingMessages = [];
     const data = message.data;
     data["instantiateWasm"] = (info,receiveInstance) => {
-        const instance = new WebAssembly.Instance(data["wasm"], info);
-        return receiveInstance(instance, data["wasm"])
+        const instance = new WebAssembly.Instance(data["html"], info);
+        return receiveInstance(instance, data["html"])
     };
     import(data.js).then(async (skwasm) => {
         await skwasm.default(data);
@@ -33,10 +33,11 @@ addEventListener("message", eventListener);
 if (!window._flutter) {
   window._flutter = {};
 }
-_flutter.buildConfig = {"engineRevision":"83675ed27633283e7fc296c8bca22e841224c096","builds":[{"compileTarget":"dart2js","renderer":"html","mainJsPath":"main.dart.js"},{}]};
+_flutter.buildConfig = {"engineRevision":"83675ed27633283e7fc296c8bca22e841224c096","builds":[{"compileTarget":"dart2js","renderer":"canvaskit","mainJsPath":"main.dart.js"},{}]};
 
 _flutter.loader.load({
   serviceWorkerSettings: {
-    serviceWorkerVersion: "2711430113" /* Flutter's service worker is deprecated and will be removed in a future Flutter release. */
+    serviceWorkerVersion: "1006434007" /* Flutter's service worker is deprecated and will be removed in a future Flutter release. */
   }
 });
+
