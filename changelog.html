@@ -80,6 +80,73 @@
 
       <section class="changelog-section">
 
+        <!-- v0.6.9 -->
+        <article class="version-block">
+          <div class="version-header">
+            <span class="version-tag">v0.6.9</span>
+            <span class="version-date">26 de julio de 2026</span>
+          </div>
+          <ul class="changelog-list">
+            <li><span class="tag tag-feat">Feat</span> Nuevo wizard de importación: Tipo → Método → Archivo/Pegar → Vista Previa → Importar.</li>
+            <li><span class="tag tag-feat">Feat</span> Pegar desde portapapeles — copiar datos desde Excel/Calc/Sheets y pegar directamente en la app (nuevo método de importación).</li>
+            <li><span class="tag tag-feat">Feat</span> Detección de tabla múltiple — detecta automáticamente si el archivo contiene varias tablas y permite seleccionar cuál importar.</li>
+            <li><span class="tag tag-feat">Feat</span> Detección de codificación CSV — intenta UTF-8, BOM, allowMalformed, Windows-1252, ISO-8859-1 automáticamente.</li>
+            <li><span class="tag tag-feat">Feat</span> Celdas combinadas en Excel — expansión heurística para nombres de mes (ej: MARZO) propagados a columnas de días.</li>
+            <li><span class="tag tag-fix">Fix</span> Crash de PDF corregido — parsers envueltos en try/catch, nunca crashean.</li>
+            <li><span class="tag tag-fix">Fix</span> Backup de Google Drive — chequeo de conectividad antes de signIn con mensajes de error reales.</li>
+            <li><span class="tag tag-fix">Fix</span> Nombre del launcher Android corregido — "profeos" → "ProfeOS".</li>
+            <li><span class="tag tag-fix">Fix</span> Permisos INTERNET y ACCESS_NETWORK_STATE agregados al manifest principal.</li>
+            <li><span class="tag tag-feat">Feat</span> Selector de tipo de importación — elegir entre Estudiantes, Asistencia, Calificaciones o Trabajo Diario.</li>
+            <li><span class="tag tag-feat">Feat</span> Selección de método — Paste (recomendado) vs Importar archivo.</li>
+            <li><span class="tag tag-feat">Feat</span> Detección de separadores — tab, punto y coma, coma o 2+ espacios automáticamente.</li>
+          </ul>
+        </article>
+
+        <!-- v0.6.8 -->
+        <article class="version-block">
+          <div class="version-header">
+            <span class="version-tag">v0.6.8</span>
+            <span class="version-date">26 de julio de 2026</span>
+          </div>
+          <ul class="changelog-list">
+            <li><span class="tag tag-feat">Feat</span> PDF TeacherSheetImporter reescrito — detección de grilla con clustering de posiciones X, parsing basado en matriz.</li>
+            <li><span class="tag tag-feat">Feat</span> Celdas combinadas en Excel — expansión heurística para nombres de mes propagados a columnas de días.</li>
+            <li><span class="tag tag-fix">Fix</span> Crash de PDF corregido — parsers envueltos en try/catch, devuelve resultado seguro en lugar de fallar.</li>
+            <li><span class="tag tag-fix">Fix</span> Importación de trabajo diario realmente inserta registros (antes era un stub vacío).</li>
+            <li><span class="tag tag-fix">Fix</span> ColumnMappingStep ahora muestra UI real con dropdowns para mapeo de columnas.</li>
+            <li><span class="tag tag-feat">Feat</span> Detección de calificaciones A-E y CP/NC en detección inteligente.</li>
+          </ul>
+        </article>
+
+        <!-- v0.6.7 -->
+        <article class="version-block">
+          <div class="version-header">
+            <span class="version-tag">v0.6.7</span>
+            <span class="version-date">26 de julio de 2026</span>
+          </div>
+          <ul class="changelog-list">
+            <li><span class="tag tag-feat">Feat</span> Google Sign-In en Windows — usa flutter_web_auth_2 con servidor local para OAuth en desktop.</li>
+            <li><span class="tag tag-feat">Feat</span> Barra de progreso en tiempo real durante importación — muestra progreso por cada fila procesada.</li>
+            <li><span class="tag tag-feat">Feat</span> TeacherSheetImporter — nuevo parser para planillas de docentes con formato de grilla.</li>
+            <li><span class="tag tag-fix">Fix</span> Callback scheme corregido en auth_repository.dart para desktop.</li>
+            <li><span class="tag tag-fix">Fix</span> detectSessionInUri deshabilitado para desktop en supabase_service.dart.</li>
+          </ul>
+        </article>
+
+        <!-- v0.6.6 -->
+        <article class="version-block">
+          <div class="version-header">
+            <span class="version-tag">v0.6.6</span>
+            <span class="version-date">26 de julio de 2026</span>
+          </div>
+          <ul class="changelog-list">
+            <li><span class="tag tag-fix">Fix</span> Importación de trabajo diario ahora realmente inserta registros (antes era un stub vacío).</li>
+            <li><span class="tag tag-fix">Fix</span> ColumnMappingStep ahora muestra UI real con dropdowns para mapeo de columnas.</li>
+            <li><span class="tag tag-feat">Feat</span> Detección de calificaciones A-E y CP/NC en detección inteligente.</li>
+            <li><span class="tag tag-feat">Feat</span> Selector de tipo de reimportación — elegir entre Estudiantes, Asistencia, Calificaciones o Trabajo Diario.</li>
+          </ul>
+        </article>
+
         <!-- v0.6.5 -->
         <article class="version-block">
           <div class="version-header">
