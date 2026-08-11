@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Manual del Asistente IA de ProfeOS: perfiles Automático, Económico, Equilibrado y Máxima calidad, cómo usar OpenRouter, elegir modelos por tarea y configurar la clave de Gemini." />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <title>Manual del Asistente IA | ProfeOS</title>
+    <style>
+      .manual-hero {
+        padding: 150px 0 60px;
+        text-align: center;
+        background: linear-gradient(160deg, #fff 0%, #effbf8 100%);
+      }
+      .dark .manual-hero { background: linear-gradient(160deg, var(--dm-bg) 0%, var(--dm-surface) 100%); }
+      .manual-hero h1 { font-size: 36px; font-weight: 800; margin: 0 0 8px; }
+      .manual-hero .subtitle { font-size: 15px; color: var(--muted); margin: 0; }
+
+      .manual-section { max-width: 760px; margin: 0 auto; padding: 0 24px 48px; }
+      .manual-section:last-of-type { padding-bottom: 80px; }
+      .manual-section h2 {
+        font-size: 22px; font-weight: 800; margin: 0 0 16px;
+        padding-bottom: 12px; border-bottom: 2px solid var(--mint);
+      }
+      .manual-section h3 { font-size: 17px; font-weight: 700; margin: 28px 0 10px; }
+      .manual-section p, .manual-section li { font-size: 15px; line-height: 1.65; color: var(--ink); }
+      .manual-section ul, .manual-section ol { padding-left: 22px; }
+      .manual-section li { margin-bottom: 8px; }
+      .dark .manual-section p, .dark .manual-section li { color: var(--dm-text); }
+
+      .note {
+        padding: 14px 16px; border-radius: 12px; margin: 18px 0;
+        background: rgba(45,191,158,.08); border: 1px solid rgba(45,191,158,.35);
+      }
+      .note strong { color: var(--mint-dark); }
+      .dark .note strong { color: var(--dm-accent); }
+      .note p { margin: 0; }
+      .note.warn { background: rgba(251,191,36,.1); border-color: rgba(251,191,36,.45); }
+      .note.warn strong { color: #b45309; }
+      .dark .note.warn strong { color: #fbbf24; }
+
+      .mode-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 18px 0; }
+      .mode-card {
+        padding: 18px; border-radius: 12px; border: 1px solid var(--line);
+        background: var(--paper);
+      }
+      .dark .mode-card { background: var(--dm-surface); border-color: var(--dm-border); }
+      .mode-card h4 { margin: 0 0 8px; font-size: 15px; font-weight: 700; }
+      .mode-card p { margin: 0; font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+      .dark .mode-card p { color: var(--dm-muted); }
+      .mode-card .tag-free {
+        display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px;
+        background: rgba(45,191,158,.15); color: var(--mint-dark); font-size: 11px; font-weight: 700;
+      }
+      .mode-card .tag-paid {
+        display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px;
+        background: rgba(251,191,36,.18); color: #b45309; font-size: 11px; font-weight: 700;
+      }
+
+      .steps { counter-reset: step; list-style: none; padding: 0; margin: 18px 0; }
+      .steps li {
+        position: relative; padding: 0 0 20px 44px; margin: 0; font-size: 15px; line-height: 1.6;
+      }
+      .steps li::before {
+        counter-increment: step; content: counter(step);
+        position: absolute; left: 0; top: 0; width: 30px; height: 30px;
+        display: flex; align-items: center; justify-content: center;
+        background: var(--mint); color: #093a31; border-radius: 50%;
+        font-weight: 700; font-size: 14px;
+      }
+
+      .table-wrap { overflow-x: auto; margin: 18px 0; border: 1px solid var(--line); border-radius: 12px; }
+      .dark .table-wrap { border-color: var(--dm-border); }
+      table.areas { width: 100%; border-collapse: collapse; font-size: 14px; }
+      table.areas th, table.areas td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+      table.areas thead th { background: var(--paper); font-size: 12.5px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+      table.areas tr:last-child td { border-bottom: 0; }
+      .dark table.areas th, .dark table.areas td { border-bottom-color: var(--dm-border); }
+      .dark table.areas thead th { background: var(--dm-surface); color: var(--dm-muted); }
+
+      code.inline {
+        background: var(--paper); border: 1px solid var(--line); border-radius: 5px;
+        padding: 2px 6px; font-size: 13px; color: #0f766e;
+      }
+      .dark code.inline { background: var(--dm-surface-alt); border-color: var(--dm-border); color: #6ee7b7; }
+      code.block {
+        display: block; background: var(--ink); color: #d1fae5; border-radius: 10px;
+        padding: 14px 16px; font-size: 13.5px; line-height: 1.6; margin: 14px 0; overflow-x: auto;
+        white-space: nowrap;
+      }
+
+      .area-table-link { font-weight: 600; color: var(--mint-dark); }
+    </style>
+  </head>
+  <body>
+    <header class="site-header is-scrolled">
+      <nav class="nav container">
+        <a class="brand" href="index.html" aria-label="ProfeOS, inicio">
+          <svg class="brand-mark" viewBox="0 0 40 48" aria-hidden="true"><path d="M8 42V14a12 12 0 0 1 24 0c0 6-4 11-10 12L8 42Z"/><path d="M14 39V15a6 6 0 0 1 12 0c0 3.3-2.7 6-6 6h-6"/></svg>
+          <span>Profe<span>OS</span></span>
+        </a>
+        <div class="nav-links">
+          <a href="index.html">Inicio</a>
+          <a href="privacy.html">Privacidad</a>
+          <a href="terms.html">Términos</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="manual-hero">
+        <h1>Manual del Asistente IA</h1>
+        <p class="subtitle">Configurá los asistentes de ProfeOS vos solo, sin preguntar.</p>
+      </section>
+
+      <!-- Introducción -->
+      <section class="manual-section">
+        <h2>¿Qué es el Asistente IA?</h2>
+        <p>
+          El Asistente IA de ProfeOS te ayuda a estructurar planificaciones, refinar
+          tablas importadas, leer fotos de planillas, escribir informes, generar
+          preguntas de evaluación y más. La IA <strong>solo interpreta documentos y
+          propone</strong>: nunca decide por vos. Si no hay IA configurada, ProfeOS
+          sigue funcionando igual con los métodos tradicionales.
+        </p>
+        <p>
+          Para activarlo solo necesitás una <strong>clave gratis de OpenRouter</strong>
+          (2 minutos). Con esa única clave, ProfeOS resuelve el modelo concreto para
+          cada tarea según el <strong>perfil</strong> que elijas. Después, en la
+          <em>Configuración avanzada</em>, podés ajustar los modelos por área y sumar
+          una clave directa de Gemini como respaldo.
+        </p>
+      </section>
+
+      <!-- Los 4 modos -->
+      <section class="manual-section">
+        <h2>Los 4 modos del Asistente</h2>
+        <p>
+          En <strong>Ajustes → Asistente IA</strong> elegís cuánto invertir. Los tres
+          primeros perfiles usan modelos <strong>gratis</strong> de OpenRouter: funcionan
+          sin créditos y sin tarjeta.
+        </p>
+        <div class="mode-grid">
+          <div class="mode-card">
+            <h4>Automático<span class="tag-free">gratis</span></h4>
+            <p>Modelos gratis de OpenRouter, sin créditos en tu cuenta. Recomendado para la mayoría.</p>
+          </div>
+          <div class="mode-card">
+            <h4>Económico<span class="tag-free">gratis</span></h4>
+            <p>Modelos gratis y livianos. El menor consumo posible. Ideal si importás mucho contenido.</p>
+          </div>
+          <div class="mode-card">
+            <h4>Equilibrado<span class="tag-free">gratis</span></h4>
+            <p>Modelos gratis con mejor calidad. Ideal para planificar y redactar.</p>
+          </div>
+          <div class="mode-card">
+            <h4>Máxima calidad<span class="tag-paid">con saldo</span></h4>
+            <p>La mejor calidad disponible (Claude, GPT-4o y Gemini Pro). Requiere créditos de OpenRouter. Un poco más lento y más caro.</p>
+          </div>
+        </div>
+        <div class="note">
+          <p><strong>En resumen:</strong> sin cargar saldo podés usar Automático, Económico y
+          Equilibrado. Solo cargá créditos en OpenRouter si querés el perfil
+          <strong>Máxima calidad</strong>.</p>
+        </div>
+      </section>
+
+      <!-- OpenRouter -->
+      <section class="manual-section">
+        <h2>¿Qué es OpenRouter y por qué es gratis?</h2>
+        <p>
+          OpenRouter es un <strong>puente hacia decenas de modelos de IA</strong> (Gemini,
+          Claude, GPT, DeepSeek, Llama y más) con <strong>una sola clave</strong>. En vez de
+          crearte una cuenta en cada empresa, una clave de OpenRouter te da acceso a todos.
+        </p>
+        <p>
+          Algunos de esos modelos tienen una versión marcada con
+          <code class="inline">:free</code>, que <strong>funciona sin créditos y sin
+          tarjeta</strong>. ProfeOS usa justamente esos modelos gratuitos en los perfiles
+          Automático, Económico y Equilibrado. Los modelos de pago (los que OpenRouter cobra
+          por uso) solo se usan en el perfil <strong>Máxima calidad</strong>, y para eso sí
+          necesitás saldo en tu cuenta.
+        </p>
+        <div class="note">
+          <p><strong>Dato:</strong> ProfeOS nunca te cobra nada por la IA. La clave es
+          <strong>tuya</strong> y va a OpenRouter directamente; la app solo la usa para
+          llamar a los modelos.</p>
+        </div>
+      </section>
+
+      <!-- Paso a paso -->
+      <section class="manual-section">
+        <h2>Configuración paso a paso</h2>
+        <ol class="steps">
+          <li><strong>Entrá a openrouter.ai</strong> y creá tu cuenta (es gratis). Podés usar tu cuenta de Google.</li>
+          <li><strong>Andá a Keys</strong> (openrouter.ai/keys) y tocá <em>"Create Key"</em>.</li>
+          <li><strong>Copiá la clave</strong> (empieza con <code class="inline">sk-or-v1-…</code>). OpenRouter solo la muestra una vez al crearla: pegala en un gestor de contraseñas o notas privadas.</li>
+          <li>En ProfeOS abrí <strong>Ajustes → Asistente IA</strong> y pegala en el campo <em>"Clave de OpenRouter"</em>.</li>
+          <li>Tocá <strong>Guardar clave</strong> y después <strong>Probar clave</strong> para confirmar que es válida.</li>
+        </ol>
+        <div class="note warn">
+          <p><strong>Importante:</strong> OpenRouter muestra la clave una sola vez, al
+          crearla. ProfeOS no puede recuperarla y no se vuelve a ver en pantalla. Si la
+          perdés, generá una nueva en openrouter.ai/keys y guardala de nuevo en la app.</p>
+        </div>
+        <p>
+          Cuando veas la tarjeta <em>"Clave de OpenRouter configurada"</em> en verde, el
+          Asistente ya está listo.
+        </p>
+      </section>
+
+      <!-- Modelos por área -->
+      <section class="manual-section">
+        <h2>Elegir modelos por área</h2>
+        <p>
+          De forma predeterminada no tenés que hacer nada: ProfeOS elige el modelo de cada
+          tarea según el perfil. Pero si querés <strong>control total</strong>, activá la
+          <em>Configuración avanzada</em> y luego el interruptor
+          <strong>"Elegir modelos por tarea"</strong>. Ahí aparece un cuadro de texto por
+          área.
+        </p>
+        <h3>Qué poner en cada cuadro</h3>
+        <p>
+          En cada cuadro se escribe el identificador del modelo en formato
+          <code class="inline">proveedor/modelo</code>, como aparece en OpenRouter. Por
+          ejemplo:
+        </p>
+        <code class="block">openai/gpt-oss-20b:free
+google/gemma-4-31b-it:free
+anthropic/claude-sonnet-4.5</code>
+        <ul>
+          <li>Si el modelo es gratis, lleva el sufijo <code class="inline">:free</code> al final.</li>
+          <li>Si dejás el cuadro <strong>vacío</strong>, se usa el modelo por defecto del perfil elegido.</li>
+          <li>El texto gris dentro de cada cuadro (hint) te muestra <strong>qué modelo usa hoy</strong> ese perfil para esa tarea.</li>
+          <li>El botón <em>reiniciar</em> que aparece a la derecha del cuadro vuelve al modelo del perfil.</li>
+        </ul>
+        <p>
+          Podés escribir cualquier modelo de OpenRouter, incluso de pago, y en cualquier
+          perfil. Si escribís un identificador inválido, la tarea fallará: revisá que el
+          nombre exista en openrouter.ai/models.
+        </p>
+
+        <h3>Las áreas que podés configurar</h3>
+        <div class="table-wrap">
+          <table class="areas">
+            <thead>
+              <tr><th>Área</th><th>Para qué se usa</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Planificaciones</strong></td><td>Estructurar y redactar planificaciones didácticas.</td></tr>
+              <tr><td><strong>Refinar tablas</strong></td><td>Corregir y ordenar tablas importadas o pegadas.</td></tr>
+              <tr><td><strong>Notas</strong></td><td>Ayudar a redactar y completar observaciones y notas.</td></tr>
+              <tr><td><strong>Lectura de fotos</strong></td><td>Reconocer texto en fotos de planillas y documentos (OCR).</td></tr>
+              <tr><td><strong>Resumir</strong></td><td>Resumir textos largos en versiones cortas.</td></tr>
+              <tr><td><strong>Informes</strong></td><td>Redactar informes de estudiantes y del curso.</td></tr>
+              <tr><td><strong>Comunicaciones</strong></td><td>Escribir comunicados y mensajes para las familias.</td></tr>
+              <tr><td><strong>Planes de clase</strong></td><td>Generar planes de clase a partir de tus datos.</td></tr>
+              <tr><td><strong>Preguntas de evaluación</strong></td><td>Crear preguntas y consignas de evaluación.</td></tr>
+              <tr><td><strong>Análisis de asistencia</strong></td><td>Analizar los registros de asistencia y detectar tendencias.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">
+          <p><strong>Consejo:</strong> en Automático y Equilibrado, "Informes" y
+          "Análisis de asistencia" ya usan modelos distintos y optimizados. Salvo que
+          quieras algo puntual, lo mejor es dejar todo en blanco y elegir solo el perfil.</p>
+        </div>
+      </section>
+
+      <!-- Gemini -->
+      <section class="manual-section">
+        <h2>La clave de Gemini (opcional)</h2>
+        <p>
+          En la <em>Configuración avanzada</em> también hay un campo para una
+          <strong>clave directa de Gemini</strong>, pensado para quien ya tiene una cuenta
+          de Google. Se usa como <strong>respaldo</strong>: si OpenRouter no responde,
+          ProfeOS intenta con Gemini automáticamente.
+        </p>
+        <ul>
+          <li>Es <strong>opcional</strong>. Con solo la clave de OpenRouter ya funciona todo.</li>
+          <li>Sirven solo las claves <code class="inline">AIzaSy…</code> de <strong>Google Cloud</strong>.</li>
+          <li>Las claves <code class="inline">AQ.</code> nuevas de AI Studio <strong>no funcionan</strong> con la conexión directa de ProfeOS.</li>
+          <li>El nivel gratis de Gemini incluye cuota para su modelo <code class="inline">gemini-2.5-flash</code>, sin tarjeta.</li>
+        </ul>
+        <p>
+          Para obtener una clave de Google Cloud: entrá a Google Cloud Console → API y
+          servicios → Credenciales → <em>Crear credenciales</em> → <em>Clave de API</em>,
+          y habilitá la API de Gemini en el mismo proyecto.
+        </p>
+      </section>
+
+      <!-- Consejos -->
+      <section class="manual-section">
+        <h2>Consejos y solución de problemas</h2>
+        <ul>
+          <li><strong>Las claves se guardan cifradas</strong> en tu dispositivo. Nunca se sincronizan a la nube ni se muestran completas en pantalla.</li>
+          <li><strong>Sin claves configuradas</strong>, ProfeOS funciona igual con los métodos tradicionales. La IA es un extra, no una obligación.</li>
+          <li>Si una tarea falla, tocá <strong>Probar clave</strong> para verificar que tu clave siga vigente (las claves de OpenRouter caducan al regenerarse o eliminarse).</li>
+          <li>Los modelos <code class="inline">:free</code> pueden estar saturados en horarios pico: esperá un minuto y reintentá.</li>
+          <li>Al cambiar de perfil, los cuadros de la configuración avanzada que dejes vacíos se adaptan automáticamente.</li>
+          <li>Revisá el modelo exacto en openrouter.ai/models antes de escribirlo: los nombres cambian con el tiempo.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div>
+          <a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 40 48" aria-hidden="true"><path d="M8 42V14a12 12 0 0 1 24 0c0 6-4 11-10 12L8 42Z"/><path d="M14 39V15a6 6 0 0 1 12 0c0 3.3-2.7 6-6 6h-6"/></svg><span>Profe<span>OS</span></span></a>
+          <p>Menos administración. Más enseñanza.</p>
+        </div>
+        <div class="footer-links">
+          <a href="privacy.html">Política de privacidad</a>
+          <a href="terms.html">Condiciones del servicio</a>
+          <a href="manual-IA.html">Manual del Asistente IA</a>
+          <a href="changelog.html">Historial de cambios</a>
+          <a href="delete-account.html">Eliminar cuenta</a>
+          <a href="mailto:hola@profeos.com.ar">Contacto</a>
+          <a href="https://www.instagram.com/profeos.app/" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>&copy; <span data-year></span> ProfeOS</span>
+        <span>Hecho en Argentina</span>
+      </div>
+    </footer>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
